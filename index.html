@@ -1,0 +1,125 @@
+<!--Indicar al navegador que el código HTML en el que está escrita la página es en la versión 5-->
+<!DOCTYPE html>
+
+<!--indica la raíz del documento, idioma, cache para uso offline-->
+<html lang="es" manifest="practica.appcache">
+
+    <head>
+        <!--Define los metadatos, el atributo charset puede usar "ISO-8859-1" o "UTF-8"-->
+        <meta charset="ISO-8859-1"/>
+        
+        <!--NAME y CONTENT Definen pares de datos-->
+        <!--Nombre de la aplicacion de la que forma parte el documento web-->
+        <meta name="application-name" content="Ejercicios y Prácticas 1.0"/>
+        
+        <!--Autor del documento web-->
+        <meta name="author" content="Víctor Cuaya"/>
+        
+        <!--Descripción utilizada por los buscadores-->
+        <meta name="description" content="Prácticas y ejercicios de HTML"/>
+        
+        <!--Nombre de la aplicación con la que se creo el documento web-->
+        <meta name="generator" content="misitio.com"/>
+        
+        <!--Palabras clave para los buscadores-->
+        <meta name="keywords" content="ejercicios, prácticas, programación, html, sitios web"/>
+        
+        <!--Establece la relación entre el documento y un recurso externo-->
+        <!--Atributos:
+            href="valor"
+            hreflang=”valor” Código de referencia del Idioma
+            media=”valor” all, braille, handhelp, print
+            rel=”valor” alternate, author, help, icon, license, next, stylesheet
+            sizes=”valor” Solo para Icon
+            type=”valor” text/css text/plain-->
+        <link rel="icon" href="Punto.ico" type="image/ico" sizes="16x16"/>
+        <title>
+            Pr&aacute;ctica 14
+        </title>
+    </head>
+    <body>
+        <!--WebSemántica-->
+        <!--Especifica un encabezado-->
+        <header>
+            <h1>Este es el T&iacute;tulo principal</h1>
+        </header>
+        <!--Vínculos y enlaces de navegación-->
+        <nav>
+            <ul>
+                <li>Principal</li>
+                <li>Fotos</li>
+                <li>Contacto</li>
+            </ul>
+        </nav>
+        <!--Define secciones en el documento-->
+        <section>
+            Aqu&iacute; va alguna secci&oacute;n
+            <!--Especifica contenido independiente-->
+            <article>
+                <header>
+                    <h1>T&iacute;tulo del Art&iacute;culo</h1>
+                </header>
+                <!--Especifica contenido-->
+                <figure>
+                    <!--Define el nombre del contenido-->
+                    <figcaption>
+                        Logotipo del lenguaje HTML5
+                    </figcaption>
+                    <img src="images.jpg" alt="logotipo html5" title="Logotipo HTML5">
+                </figure>
+                Contenido del art&iacute;culo
+                <p>
+                    <time datetime="2020-11-01">
+                        Hallowen
+                    </time>
+                </p>
+                <p>
+                    Reui&oacute;n Familiar
+                    <time datetime="2020-12-25">
+                        Navidad
+                    </time>
+                    a las
+                    <time>
+                        10:00
+                    </time>
+                    pm
+                </p>
+                <details>
+                    <summary>Buscadores</summary>
+                    <ul>
+                        <li><a href="http://www.google.com">Google</a></li>
+                        <li><a href="http://www.bing.com">Bing</a></li>
+                    </ul>
+                </details>
+                <p>
+                    <audio controls autoplay loop muted>
+                        <source src="Data-1968.mp3">
+                        Tu navegador no soporta audio
+                    </audio>
+                </p>
+                <p>
+                    <audio preload="none">
+                        <source src="Data-1968.mp3" type="audio/mp3">
+                    </audio>
+                </p>
+                <p>
+                    <video width="320" height="240" controls poster="images.jpg">
+                        <source src="Cuando yo ya no pueda.mp4" type="video/mp4">
+                        Tu navegador no soporta HTML5 video.
+                    </video>
+                </p>
+                <footer>
+                    <p>Comentarios</p>
+                </footer>
+            </article>
+        </section>
+        <!--Define contenido al margen del contenido principal-->
+        <aside>
+            Contenido marginal
+        </aside>
+        <!--Define un pie de página-->
+        <footer>
+            Pie de p&aacute;gina
+        </footer>
+    </body>
+</html>
