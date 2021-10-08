@@ -3,9 +3,9 @@
 
 	$message = '';
 
-	if(!empty($_POST['user']) && !empty($_POST['correo']) && !empty($_POST['tel']) && !empty($_POST['nombre']) && !empty($_POST['paterno']) && !empty($_POST['password'])){
+	if(!empty($_POST['user']) && !empty($_POST['correo']) && !empty($_POST['tel']) && !empty($_POST['nombre']) && !empty($_POST['paterno']) && !empty($_POST['pass'])){
 		
-		$sql = "INSERT INTO cliente (tel, correo, password, user, nombre, paterno) VALUES (:tel, :correo, :password, :user, :nombre, :paterno)";
+		$sql = "INSERT INTO cliente (tel, correo, pass, user, nombre, paterno) VALUES (:tel, :correo, :pass, :user, :nombre, :paterno)";
 
 		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(':tel',$_POST['tel']);
@@ -13,9 +13,9 @@
 
 		$stmt->bindParam(':correo',$correosinespacio);
 
-		$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+		$password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
 
-		$stmt->bindParam(':password',$password);
+		$stmt->bindParam(':pass',$password);
 		$stmt->bindParam(':user',$_POST['user']);
 		$stmt->bindParam(':nombre',$_POST['nombre']);
 		$stmt->bindParam(':paterno',$_POST['paterno']);
@@ -52,7 +52,7 @@
 		<input type="text" name="nombre" placeholder="Nombre">
 		<input type="text" name="paterno" placeholder="Apellido paterno"> 
 		<input type="text" name="tel" placeholder="Numero celular">
-		<input type="password" name="password" placeholder="Contraseña">
+		<input type="password" name="pass" placeholder="Contraseña">
 		<input type="password" name="passwordcon" placeholder="Confirmar contraseña">
 		<input type="submit" name="send">
 
