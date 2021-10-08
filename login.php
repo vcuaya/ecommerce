@@ -1,76 +1,51 @@
 <?php
-session_start();
-$alert ='';
-require "database.php";
 
-if(!empty($_POST))
-{
-	if(empty($_POST['correo']) || empty($_POST['pass']))
-	{
-		$alert = 'Ingrese usuario y contraseña';
-	}
-	else{
-		
+  session_start();
 
-		$correo = $_POST['correo'];
-		$password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
+  if (isset($_SESSION['user_id'])) {
+    header('Location: catalogue.php');
+  }
+  require 'database.php';
 
-		/*$query = $conn->prepare('SELECT idcliente, correo, pass FROM cliente WHERE correo = :correo and pass = :pass');
-		$query->bindParam(':correo', $_POST['correo']);
-		$query->bindParam(':pass', $password);
-		$query->execute();*/
+  if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    $records = $conn->prepare('SELECT idcliente, correo, password FROM cliente WHERE correo = :email');
+    $records->bindParam(':email', $_POST['email']);
+    $records->execute();
+    $results = $records->fetch(PDO::FETCH_ASSOC);
 
-		$query = mysqli_query($conn,"SELECT * FROM cliente WHERE correo = '$correo' and pass = '$password'");
-		//$result = 0;
-		//$result = count($query);
-		//$result = mysqli_num_rows($query);
-		$result = mysqli_num_rows($query);
+    $message = '';
 
-		
-		
-		
-		
-		if($result > 0)
-		{
-			$data = mysqli_fetch_array($query);
-			$_SESSION['correo'] = $data['correo'];
-			$_SESSION['pass'] = $data['pass'];
-
-			header('location:indice.php');
-		}
-		else
-		{
-			$alert= 'Usuario o contraseña inválidos';
-			session_destroy();
-		}
-	}
-}
+    if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
+      $_SESSION['user_id'] = $results['idcliente'];
+      header("Location: catalogue.php");
+    } else {
+      $message = 'Correo o contraseña incorrectos';
+    }
+  }
 ?>
 
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>LOGIN</title>
-	<link rel="stylesheet" type="text/css" href="https://fonts.goggleapis.com/css/css?family=Roboto">
-	<link rel="stylesheet" type="text/css" href="assets/css/estilos1.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <title>Iniciar sesion</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/estilos1.css">
+  </head>
+  <body>
+    <?php require 'partials/header.php' ?>
 
-	<?php require 'partials/header.php' ?>
+    <?php if(!empty($message)): ?>
+      <p> <?= $message ?></p>
+    <?php endif; ?>
 
-	<h1>Login</h1>
+    <h1>Iniciar sesion</h1>
+    <span>o <a href="signup.php">registrarse</a></span>
 
-	<?php if(!empty($message)) : ?>
-		<p><?= $message ?></p>
-	<?php endif;?>
-
-	<form action="login.php" method="post">
-		<input type="text" name="correo" placeholder="Correo electronico">
-		<input type="password" name="pass" placeholder="Contraseña">
-		<input type="submit" name="send">
-	</form>
-	<span><a href="signup.php">Registrarse</a></span>
-
-</body>
+    <form action="login.php" method="POST">
+      <input name="email" type="text" placeholder="ingrese email">
+      <input name="password" type="password" placeholder="ingrese contraseña">
+      <input type="submit" value="Submit">
+    </form>
+  </body>
 </html>
