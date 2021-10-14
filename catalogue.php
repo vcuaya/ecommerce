@@ -1,3 +1,25 @@
+<?php
+  session_start();
+
+  require 'database.php';
+
+  if (isset($_SESSION['user_id'])) {
+    $records = $conn->prepare('SELECT idcliente, correo, password, user FROM cliente WHERE idcliente = :id');
+    $records->bindParam(':id', $_SESSION['user_id']);
+    $records->execute();
+    $results = $records->fetch(PDO::FETCH_ASSOC);
+
+    $user = null;
+
+    if (count($results) > 0) {
+      $user = $results;
+    }else{
+      header("Location: indice.php");
+    }
+  }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>

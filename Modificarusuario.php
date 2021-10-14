@@ -13,7 +13,6 @@
 
     if (count($results) > 0) {
       $user = $results;
-      header("Location: catalogue.php");
     }
   }
 ?>
@@ -22,7 +21,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Bienvenido a tu WebApp</title>
+    <title>Perfil usuario</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/estilos1.css">
   </head>
@@ -30,8 +29,7 @@
     <?php require 'partials/header.php' ?>
 
     <?php if(!empty($user)): ?>
-      <br> Bienvenido. <?= $user['user']; ?>
-      <br>Inició sesion exitosamente
+      <br> Bienvenido <?= $user['user']; ?>
       <a href="logout.php">
         Cerrar sesion
       </a>
