@@ -2,6 +2,7 @@
   session_start();
 
   require 'database.php';
+  $user = null;
 
   if (isset($_SESSION['user_id'])) {
     $records = $conn->prepare('SELECT idcliente, correo, password, user FROM cliente WHERE idcliente = :id');
@@ -9,13 +10,13 @@
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
 
-    $user = null;
 
     if (count($results) > 0) {
       $user = $results;
-    }else{
-      header("Location: indice.php");
     }
+  }
+  if($user==null){
+      header("Location: indice.php");
   }
 ?>
 
@@ -59,6 +60,11 @@
             </li>
             <li class="nav-item">
               <a class= "nav-link" href="logout.php">Cerrar sesion</a>
+            </li>
+            <li class="nav-item">
+              <a href="verusuario.php">
+                <img style="width: 35px; height: 35px;" src="images/perfil2.png">
+              </a>
             </li>
 
             
