@@ -3,16 +3,24 @@
 
   require 'database.php';
   $user = null;
+  $direccion = null;
 
   if (isset($_SESSION['user_id'])) {
     $records = $conn->prepare('SELECT idcliente, correo, password, user, tel, rfc, nombre, segundonombre, paterno, materno, fecharegistro  FROM cliente WHERE idcliente = :id');
     $records->bindParam(':id', $_SESSION['user_id']);
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
-
-
     if (count($results) > 0) {
       $user = $results;
+
+      $records2 = $conn->prepare('SELECT iddireccion, idcliente, estado, municipio, colonia, calle, numexterior, numinterior, lote, manzana, edificio, numpiso, cp  FROM direccion WHERE idcliente = :id');
+      $records2->bindParam(':id', $user['idcliente']);
+      $records2->execute();
+      $results2 = $records2->fetch(PDO::FETCH_ASSOC);
+
+      if(count($results2 > 0)){
+        $direccion = $results2;
+      }
     }
   }
   if($user==null){
@@ -48,11 +56,40 @@
       Apellido paterno: <u><?= $user['paterno']; ?></u><br>
       Apellido materno: <u><?= $user['materno']; ?></u><br>
 
-
       <br>
-      <a href="catalogue.php">
-        pagina principal
-      </a>
     </div>
+
+    <?php if(!empty($direccion)): ?>
+
+      <div style="border: gray 2px solid; margin: 30px;">
+        Direccion</b><br><br>
+        
+        Estado: <u><?= $direccion['estado']; ?></u><br>
+        Municipio: <u><?= $direccion['municipio']; ?></u><br>
+        Colonia: <u><?= $direccion['colonia']; ?></u><br>
+        Calle: <u><?= $direccion['calle']; ?></u><br>
+        Numero exterior: <u><?= $direccion['numexterior']; ?></u><br>
+        Numero interior: <u><?= $direccion['numinterior']; ?></u><br>
+        Lote: <u><?= $direccion['lote']; ?></u><br>
+        Manzana: <u><?= $direccion['manzana']; ?></u><br>
+        Edificio: <u><?= $direccion['edificio']; ?></u><br>
+        Numero de piso: <u><?= $direccion['numpiso']; ?></u><br>
+        CP: <u><?= $direccion['cp']; ?></u><br>
+     </div>
+
+    <?php else: ?>
+    <div style="border: gray 2px solid; margin: 30px;">
+      <b>No tiene direccion registrada</b>
+      <a href="agregardireccion.php">Agregar direccion</a>
+    </div>
+    <?php endif; ?>
+
+    <br>
+    <a href="catalogue.php">
+      pagina principal
+    </a>
+
+
+    
   </body>
 </html>
