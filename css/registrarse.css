@@ -1,0 +1,38 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5 rem;
+    font-weight: 300;
+    color: black;
+    letter-spacing: .05rem;
+}
+
+.p-6{
+    padding: 4rem 7rem;
+}
+
+.contact-box{
+   padding: 3rem; 
+}
+
+.form-control{
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+.borde-i{
+    border: solid 3px rgb(172, 172, 172);
+}
+
+
+.centrar{
+    border-radius: 3%;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    width: 70%;
+    height: auto;
+
+}

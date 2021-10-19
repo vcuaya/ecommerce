@@ -1,0 +1,47 @@
+.img-fluid{
+    width: 180px;
+    height: 110px;
+}
+
+body{
+    font-family: 'Spartan', sans-serif;
+    font-weight: 300;
+}
+
+.bg-light-x{
+    background-color: rgb(247, 247, 247);
+}
+
+.form-control , .btn{
+    min-height: 3.125rem;
+    line-height: initial;
+}
+
+.cuenta{
+    font-weight: bold;
+}
+
+.cuenta1:hover{
+    font-weight: bold;
+}
+
+.img-1{
+    background-image: url('/images/cyber-monday-shopping-sales.jpg');
+    background-size: cover;
+    background-position: center ;
+    height: 100vh
+}
+
+.img-2{
+    background-image: url('/images/cyber-monday-shopping-sales 2.jpg');
+    background-size: cover;
+    background-position: center ;
+    height: 100vh
+}
+
+.img-3{
+    background-image: url('/images/cyber-monday-shopping-sales 3.jpg');
+    background-size: cover;
+    background-position: center ;
+    height: 100vh
+}
