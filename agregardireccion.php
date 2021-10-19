@@ -2,6 +2,7 @@
   session_start();
   require 'database.php';
   $user = null;
+  $message = '';
   if (isset($_SESSION['user_id'])) {
     $records = $conn->prepare('SELECT idcliente, correo, password, user, tel, rfc, nombre, segundonombre, paterno, materno, fecharegistro  FROM cliente WHERE idcliente = :id');
     $records->bindParam(':id', $_SESSION['user_id']);
@@ -10,42 +11,48 @@
     if (count($results) > 0) {
       $user = $results;
     }
+
+
+
+      if(!empty($_POST['estado']) ){
+
+        $mysql = "INSERT INTO direccion (idcliente,estado,municipio,colonia,calle,numexterior,numinterior,lote,manzana,edificio,numpiso,cp) VALUES (:id,:estado,:municipio,:colonia,:calle,:numexterior,:numinterior,:lote,:manzana,:edificio,:numpiso,:cp)";
+
+        $agregard = $conn->prepare($mysql);
+
+
+        $agregard->bindParam(':id',$_SESSION['user_id']);
+        
+        $agregard->bindParam(':estado',$_POST['estado']);
+        $agregard->bindParam(':municipio',$_POST['municipio']);
+        $agregard->bindParam(':colonia',$_POST['colonia']);
+        $agregard->bindParam(':calle',$_POST['calle']);
+        $agregard->bindParam(':numexterior',$_POST['numexterior']);
+        $agregard->bindParam(':numinterior',$_POST['numinterior']);
+        $agregard->bindParam(':lote',$_POST['lote']);
+        $agregard->bindParam(':manzana',$_POST['manzana']);
+        $agregard->bindParam(':edificio',$_POST['edificio']);
+        $agregard->bindParam(':numpiso',$_POST['numpiso']);
+        $agregard->bindParam(':cp',$_POST['cp']);
+
+
+        if ($agregard->execute()){
+          $message = 'Direccion agregada';
+        }else{
+          $message = 'Error al guardar direccion';
+        }
+      }
   }
+
   if($user==null){
       header("Location: indice.php");
   }
 
 
 
-  $message = '';
-
-  if(!empty($_POST['estado']) || !empty($_POST['municipio']) || !empty($_POST['colonia']) || !empty($_POST['calle']) || !empty($_POST['numexterior']) || !empty($_POST['cp']) || !empty($_POST['numinterior']) || !empty($_POST['lote']) || !empty($_POST['manzana']) || !empty($_POST['edificio']) || !empty($_POST['numpiso'])){
 
 
-    $sql = "INSERT INTO direccion (idcliente,estado,municipio,colonia,calle,numexterior,numinterior,lote,manzana,edificio,numpiso,cp) VALUES (:id,:estado,:municipio,:colonia,:calle,:numexterior,:numinterior,:lote,:manzana,:edificio,:numpiso,:cp)";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':id',$user["idcliente"]);
-    $stmt->bindParam(':estado',$_POST['estado']);
-    $stmt->bindParam(':municipio',$_POST['municipio']);
-    $stmt->bindParam(':colonia',$_POST['colonia']);
-    $stmt->bindParam(':calle',$_POST['calle']);
-    $stmt->bindParam(':numexterior',$_POST['numexterior']);
-    $stmt->bindParam(':numinterior',$_POST['numinterior']);
-    $stmt->bindParam(':lote',$_POST['lote']);
-    $stmt->bindParam(':manzana',$_POST['manzana']);
-    $stmt->bindParam(':edificio',$_POST['edificio']);
-    $stmt->bindParam(':numpiso',$_POST['numpiso']);
-    $stmt->bindParam(':cp',$_POST['cp']);
-
-
-    if ($stmt->execute()){
-      $message = 'Direccion agregada';
-    }else{
-      $message = 'Error al guardar direccion';
-    }
-
-  }
 
 ?>
 
