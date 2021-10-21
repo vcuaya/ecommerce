@@ -85,7 +85,7 @@
     <?php endif; ?>
 
     <br>
-    <a href="catalogue.php">
+    <a href="vistas/catalogue.php">
       pagina principal
     </a>
 
