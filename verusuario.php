@@ -26,9 +26,13 @@
   if($user==null){
       header("Location: indice.php");
   }
+
+
+  
+
 ?>
 
-
+"DELETE FROM `direccion` WHERE `direccion`.`iddireccion` = 7"
 
 <!DOCTYPE html>
 <html>
@@ -75,7 +79,14 @@
         Edificio: <u><?= $direccion['edificio']; ?></u><br>
         Numero de piso: <u><?= $direccion['numpiso']; ?></u><br>
         CP: <u><?= $direccion['cp']; ?></u><br>
+
+              <form action="verusuario.php" method="post">
+        <input type="button" name="eliminar" value="Eliminar direccion">
+      </form>
+
      </div>
+     <a href="agregardireccion.php">Agregar direccion nueva</a>
+
 
     <?php else: ?>
     <div style="border: gray 2px solid; margin: 30px;">

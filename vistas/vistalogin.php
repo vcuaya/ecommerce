@@ -114,7 +114,7 @@
 
         <div class="text-center px-ñg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
           <p class="d-inline-block mb-0">¿Todavía no tienes una cuenta?</p>
-          <a href="registrarse.html" class="text-dark font-weight-bold text-decoration-none cuenta1">Crear una ahora</a>
+          <a href="signup.php" class="text-dark font-weight-bold text-decoration-none cuenta1">Crear una ahora</a>
         </div>
 
       </div>

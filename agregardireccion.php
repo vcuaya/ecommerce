@@ -83,8 +83,8 @@
           Municipio: <input type="text" name="municipio" placeholder="Municipio"><br>
           Colonia: <input type="text" name="colonia" placeholder="Colonia"><br>
           Calle: <input type="text" name="calle" placeholder="Calle"><br>
-          Numero exterior: <input type="numexterior" name="nombre" placeholder="Numero exterior"><br>
-          Numero interior: <input type="numinterior" name="segundonombre" placeholder="Numero interior"><br>
+          Numero exterior: <input type="text" name="numexterior" placeholder="Numero exterior"><br>
+          Numero interior: <input type="text" name="numinterior" placeholder="Numero interior"><br>
           Lote: <input type="text" name="lote" placeholder="Lote"><br>
           Manzana: <input type="text" name="manzana" placeholder="Manzana"><br>
           Edificio: <input type="text" name="edificio" placeholder="Edificio"><br>
