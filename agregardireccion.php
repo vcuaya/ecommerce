@@ -70,7 +70,7 @@
     <?php require 'partials/header.php' ?>
 
     <h1 style="display: inline-flex;">Direccion</h1>
-    <a style=" display: inline-flex; align-content: right;" href="verusuario.php">
+    <a style=" display: inline-flex; align-content: right;" href="direcciones/principal.php">
       <img style="width: 35px; height: 35px;" src="images/tache.png">
     </a><br>
     <?php if(!empty($message)): ?>

@@ -1,6 +1,6 @@
 <?php 
-include("function.php");
+include("funciones.php");
 $id = $_GET['iddireccion'];
 delete('direccion','iddireccion',$id);
-header("location:index.php");
+header("location:principal.php");
 ?>

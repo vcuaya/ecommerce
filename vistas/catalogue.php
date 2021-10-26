@@ -62,7 +62,7 @@
               <a class= "nav-link" href="../logout.php">Cerrar sesion</a>
             </li>
             <li class="nav-item">
-              <a href="../verusuario.php">
+              <a href="../direcciones/principal.php">
                 <img style="width: 35px; height: 35px;" src="../images/perfil2.png">
               </a>
             </li>
