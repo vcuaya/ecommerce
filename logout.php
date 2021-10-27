@@ -5,5 +5,5 @@
 
   session_destroy();
 
-  header('Location: indice.php');
+  header('Location: vistas/vistalogin.php');
 ?>
