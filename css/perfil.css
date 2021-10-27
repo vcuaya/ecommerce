@@ -1,0 +1,83 @@
+.navegacion{
+    size: 2px;
+    width: 97%;
+    margin: 0 auto;
+}
+
+.menu_colapsable{
+    padding-left: 10px;
+}
+
+.imagen_perfil{
+    width: 140px;
+    height: 140px;
+}
+
+.link_perfil{
+background-color: rgba(0, 0, 0, 0);
+border-bottom-color:#C1241A;
+border-bottom-width:0px;
+border-left-color: #C1241A;
+border-left-style: solid;
+border-left-width: 4px;
+border-right-color:#C1241A;
+border-right-width:0px;
+border-top-color:#C1241A;
+border-top-width:0px;
+box-sizing:border-box;
+color:rgb(63, 63, 64);
+cursor:pointer;
+display:block;
+font-size:14px;
+font-weight:700;
+height:48.1px;
+letter-spacing:normal;
+line-height:16.1px;
+margin-bottom:8px;
+margin-top:8px;
+padding-bottom:16px;
+padding-left:16px;
+padding-top:16px;
+text-decoration-color:rgb(63, 63, 64);
+text-decoration-line:none;
+text-decoration-style:solid;
+text-size-adjust:100%;
+text-transform:none;
+
+width:109.113px;
+}
+
+.datos{
+    padding-left: 10px;
+}
+
+
+
+.fondo1{
+    background-color: #C1241A;
+    opacity: 95%;
+}
+
+.fondo1 h2{
+    font-size: 40px;
+}
+
+.bloque1{
+    padding: auto;
+    margin: auto;
+    background: rgb(160, 59, 59);
+}
+
+.informacion{
+    font-size: 18px;
+}
+
+.boton1{
+    width: 80px;
+    height: 40px;
+}
+
+.form-control{
+    border-radius: .5rem;
+    padding: 1rem;
+}
