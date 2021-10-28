@@ -9,6 +9,11 @@ body{
     padding: 4rem 7rem;
 }
 
+.fondo1{
+    background-color: #C1241A;
+    opacity: 95%;
+}
+
 .contact-box{
    padding: 3rem; 
 }
@@ -36,12 +41,9 @@ body{
 
 }
 
-
-
 .cuenta1{
     color: black;
     font-weight: bold;
 }
-
 
 
