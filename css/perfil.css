@@ -2,16 +2,27 @@
     size: 2px;
     width: 97%;
     margin: 0 auto;
+
 }
 
 .menu_colapsable{
     padding-left: 10px;
 }
 
+.logo-link{
+    max-width: 170px;
+    padding-left: 10px;
+}
+
+.barra{
+    padding-right: 10px;
+}
+
 .imagen_perfil{
     width: 140px;
     height: 140px;
 }
+
 
 .link_perfil{
 background-color: rgba(0, 0, 0, 0);
@@ -43,14 +54,7 @@ text-decoration-line:none;
 text-decoration-style:solid;
 text-size-adjust:100%;
 text-transform:none;
-
-width:109.113px;
 }
-
-.datos{
-    padding-left: 10px;
-}
-
 
 
 .fondo1{
@@ -75,9 +79,4 @@ width:109.113px;
 .boton1{
     width: 80px;
     height: 40px;
-}
-
-.form-control{
-    border-radius: .5rem;
-    padding: 1rem;
 }
