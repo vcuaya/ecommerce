@@ -5,21 +5,59 @@
   if (isset($_SESSION['user_id'])) {
     header('Location: catalogue.php');
   }
+  if (isset($_SESSION['admin_id'])) {
+    header('Location: agregarProducto.php');
+  }
+
   require '../database.php';
 
   if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    $results = NULL;
     $records = $conn->prepare('SELECT idcliente, correo, password FROM cliente WHERE correo = :email');
     $records->bindParam(':email', $_POST['email']);
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
+    $contra = $_POST['password'];
+
 
     $message = '';
+    $value = false;
 
-    if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
-      $_SESSION['user_id'] = $results['idcliente'];
-      header("Location: catalogue.php");
+    if($results != NULL){
+      echo $results['password'];
+      $value = password_verify($contra, $results['password']);
+      if($value == true){
+        $_SESSION['user_id'] = $results['idcliente'];
+        header("Location: catalogue.php");
+      }else {
+          $message = 'Correo o contraseña incorrectos';
+        }
     } else {
-      $message = 'Correo o contraseña incorrectos';
+
+      $results2 = NULL;
+      $records2 = $conn->prepare('SELECT idadministrador, correo, password FROM administrador WHERE correo = :email');
+      $records2->bindParam(':email', $_POST['email']);
+      $records2->execute();
+      $results2 = $records2->fetch(PDO::FETCH_ASSOC);
+      $results3 = $records2->fetch(PDO::FETCH_ASSOC);
+      $value2=false;
+
+      $message = '';
+
+
+      if($results2 != NULL){
+        
+        if(password_verify($_POST['password'], $results2['password'])){
+          $_SESSION['admin_id'] = $results2['idadministrador'];
+          header("Location: agregarProducto.php");
+          $message='Datos correctos';
+
+        }else {
+            $message = 'Correo o contraseña del administrador incorrectos';
+          }
+      }else{
+        $message='Correo no encontrado';
+      }
     }
   }
 ?>
@@ -108,6 +146,9 @@
               <a href="#" id="emailHelp" class="form-text text-muted text-decoration-none cuenta1">¿Has olvidado tu
                 contraseña?</a>
             </div>
+              <?php if(!empty($message)): ?>
+                <p style="font-weight:bold;"> <?= $message ?></p>
+              <?php endif; ?>
             <button type="submit" class="btn btn-primary w-100 cuenta">Iniciar Sesion</button>
           </form>
         </div>
