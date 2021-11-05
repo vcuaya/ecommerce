@@ -3,13 +3,13 @@
   session_start();
 
   if (isset($_SESSION['user_id'])) {
-    header('Location: catalogue.php');
+    header('Location: ../index.php');
   }
   if (isset($_SESSION['admin_id'])) {
     header('Location: agregarProducto.php');
   }
 
-  require '../database.php';
+  require '../conexion/database.php';
 
   if (!empty($_POST['email']) && !empty($_POST['password'])) {
     $results = NULL;
@@ -24,11 +24,10 @@
     $value = false;
 
     if($results != NULL){
-      echo $results['password'];
       $value = password_verify($contra, $results['password']);
       if($value == true){
         $_SESSION['user_id'] = $results['idcliente'];
-        header("Location: catalogue.php");
+        header("Location: ../index.php");
       }else {
           $message = 'Correo o contraseña incorrectos';
         }
@@ -99,7 +98,7 @@
             <div class="carousel-item img-1 min-vh-100 active">
               <div class="carousel-caption d-none d-md-block">
                 <h5 class="font-weight-bold text-dark">Todo lo que necesites</h5>
-                <a href="index.html" class="text-decoration-none">Visita nuestra tienda</a>
+                <a href="../index.php" class="text-decoration-none">Visita nuestra tienda</a>
               </div>
             </div>
             <div class="carousel-item img-2 min-vh-100">
@@ -147,7 +146,7 @@
                 contraseña?</a>
             </div>
               <?php if(!empty($message)): ?>
-                <p style="font-weight:bold;"> <?= $message ?></p>
+                <div style="color: white; text-align:center; background-color:red; border-radius: 5px;"><p style="font-weight:bold;"> <?= $message ?></p></div>
               <?php endif; ?>
             <button type="submit" class="btn btn-primary w-100 cuenta">Iniciar Sesion</button>
           </form>
