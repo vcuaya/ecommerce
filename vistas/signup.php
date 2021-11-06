@@ -1,7 +1,7 @@
 
 <?php
 
-  require '../database.php';
+  require '../conexion/database.php';
 
   $message = '';
 

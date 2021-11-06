@@ -16,7 +16,7 @@
     }
   }
   if($user==null){
-      header("Location: indice.php");
+      header("Location: vistalogin.php");
   }
 ?>
 
