@@ -26,14 +26,14 @@
 
 .link_perfil{
 background-color: rgba(0, 0, 0, 0);
-border-bottom-color:#C1241A;
+border-bottom-color:#1B1F2F;
 border-bottom-width:0px;
-border-left-color: #C1241A;
+border-left-color: #1B1F2F;
 border-left-style: solid;
 border-left-width: 4px;
-border-right-color:#C1241A;
+border-right-color:#1B1F2F;
 border-right-width:0px;
-border-top-color:#C1241A;
+border-top-color:#1B1F2F;
 border-top-width:0px;
 box-sizing:border-box;
 color:rgb(63, 63, 64);
@@ -58,7 +58,7 @@ text-transform:none;
 
 
 .fondo1{
-    background-color: #C1241A;
+    background-color: #304072;
     opacity: 95%;
 }
 
@@ -69,7 +69,7 @@ text-transform:none;
 .bloque1{
     padding: auto;
     margin: auto;
-    background: rgb(160, 59, 59);
+    background: #1B1F2F;
 }
 
 .informacion{
@@ -79,4 +79,8 @@ text-transform:none;
 .boton1{
     width: 80px;
     height: 40px;
+}
+
+.fondo-footer{
+    background: #1B1F2F;
 }
