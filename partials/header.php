@@ -40,7 +40,7 @@ if (isset($_SESSION['user_id'])) {
 <body>
     <nav class="row navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid ">
-            <a class="navbar-brand col-md-4 col-lg-5  logo-link" href="#">
+            <a class="navbar-brand col-md-4 col-lg-5  logo-link" href="index.php">
                 <img src="logos/logo_narvar.png" alt="logo" width="52" height="28" class="d-inline-block align-text-top "> E-commerce
             </a>
 
