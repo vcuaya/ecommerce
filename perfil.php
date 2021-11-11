@@ -17,10 +17,10 @@ if ($user == null) {
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="perfil.php" class="text-decoration-none link_perfil ">Cuenta</a></li>
-                <li class="list-group-item"><a href="perfil_direccion.html" class="text-decoration-none link_perfil">Direcciones</a>
+                <li class="list-group-item"><a href="perfil_direcciones.php" class="text-decoration-none link_perfil">Direcciones</a>
                 </li>
-                <li class="list-group-item"><a href="perfil_tarjeta.html" class="text-decoration-none link_perfil">Tarjetas</a></li>
-                <li class="list-group-item"><a class="text-decoration-none link_perfil">Salir</a></li>
+                <li class="list-group-item"><a href="perfil_tarjeta.php" class="text-decoration-none link_perfil">Tarjetas</a></li>
+                <li class="list-group-item"><a class="text-decoration-none link_perfil" href="logout.php">Salir</a></li>
             </ul>
         </div>
 

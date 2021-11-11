@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require 'database.php';
+  require 'conexion/database.php';
   $user = null;
   $message = '';
   if (isset($_SESSION['user_id'])) {

@@ -1,7 +1,7 @@
 <?php
   session_start();
 
-  require 'database.php';
+  require 'conexion/database.php';
   $user = null;
   $direccion = null;
 
@@ -18,7 +18,7 @@
       $records2->execute();
       $results2 = $records2->fetch(PDO::FETCH_ASSOC);
 
-      if(count($results2 > 0)){
+      if(count($results2) > 0){
         $direccion = $results2;
       }
     }

@@ -138,7 +138,7 @@
               </div>
             <div class="col-12">
                 <button class="btn btn-outline-primary mb-2 me-2" type="submit">Guardar</button>
-                <a href="perfil.html" class="btn btn-outline-danger position-absolute boton1">Cancelar</a>
+                <a href="perfil.php" class="btn btn-outline-danger position-absolute boton1">Cancelar</a>
             </div>
             
         </form>

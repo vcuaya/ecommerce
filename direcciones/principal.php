@@ -1,7 +1,7 @@
 <?php
   session_start();
 
-  require '../database.php';
+  require '../conexion/database.php';
   $user = null;
   $direccion = null;
 

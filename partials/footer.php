@@ -1,15 +1,15 @@
-<div class="p-1 bg-light">
-        <footer class="py-3 my-4">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Inicio</a></li>
-                <li class="nav-item"><a href="carrito.html" class="nav-link px-2 text-muted">Carrito</a></li>
-                <li class="nav-item"><a href="catalogo.html" class="nav-link px-2 text-muted">Catálogo</a></li>
-                <li class="nav-item"><a href="acerca_de.html" class="nav-link px-2 text-muted">Acerca de</a></li>
-                <li class="nav-item"><a href="perfil.php" class="nav-link px-2 text-muted">Cuenta</a></li>
-            </ul>
-            <p class="text-center text-muted">© 2021 E-commerce, Inc</p>
-        </footer>
-    </div>
+<div class="p-1 fondo-footer">
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="index.php" class="nav-link px-2 text-white">Inicio</a></li>
+        <li class="nav-item"><a href="carrito.html" class="nav-link px-2 text-white">Carrito</a></li>
+        <li class="nav-item"><a href="catalogo.html" class="nav-link px-2 text-white">Catálogo</a></li>
+        <li class="nav-item"><a href="acerca_de.html" class="nav-link px-2 text-white">Acerca de</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Cuenta</a></li>
+      </ul>
+      <p class="text-center text-muted">© 2021 E-commerce, Inc</p>
+    </footer>
+  </div>
 
 
     <!-- Optional JavaScript; choose one of the two! -->
