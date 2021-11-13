@@ -42,7 +42,7 @@ if (!empty($_POST['correo']) || !empty($_POST['user'])  || !empty($_POST['tel'])
             <hr class="separador">
 
             <ul class="list-group list-group-flush">
-            <li class="list-group-item"><a href="perfil.php" class="text-decoration-none link_perfil ">Cuenta</a></li>
+                <li class="list-group-item"><a href="perfil.php" class="text-decoration-none link_perfil ">Cuenta</a></li>
                 <li class="list-group-item"><a href="perfil_direcciones.php" class="text-decoration-none link_perfil">Direcciones</a>
                 </li>
                 <li class="list-group-item"><a href="perfil_tarjeta.php" class="text-decoration-none link_perfil">Tarjetas</a></li>
@@ -54,10 +54,15 @@ if (!empty($_POST['correo']) || !empty($_POST['user'])  || !empty($_POST['tel'])
 
     <div class="col-lg-9">
         <?php if (!empty($message)) : ?>
-            <div style="color: white; font-weight: bold; text-align: center; padding: 30%; background-color: #00bb2d; border-radius:5px; font-size: 150%">
-                <p> <?= $message ?></p>
+            <div class="container shadow p-3 mb-5 bg-body rounded">
+                <div class="fondo1 p-3 text-white rounded ">
+                    <h2 class="fw-bold">Perfil</h2>
+                </div>
+                <hr>
+                <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1 row">
+                    <p> <?= $message ?></p>
+                </div>
             </div>
-
         <?php else : ?>
             <form action="perfil-editar.php" method="post">
                 <div class="container shadow p-3 mb-5 bg-body rounded">

@@ -37,6 +37,7 @@ if (isset($_SESSION['user_id'])) {
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/perfil_Y_tarjeta.css">
+    
 
     <title>E-commerce</title>
 </head>
