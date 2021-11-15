@@ -3,15 +3,26 @@
 if ($user == null) {
     header("Location: vistas/vistalogin.php");
 }
+if (isset($_GET['iddireccion'])) {
+    $idd = $_GET['iddireccion'];
+    $recordsd = $conn->prepare('SELECT * FROM direccion WHERE iddireccion = :idd');
+    $recordsd->bindParam(':idd', $idd);
+    $recordsd->execute();
+    $resultsd = $recordsd->fetch(PDO::FETCH_ASSOC);
 
+
+    if (count($resultsd) > 0) {
+        $direccion = $resultsd;
+    }
+}
 if (!empty($_POST['estado']) && !empty($_POST['municipio'])  && !empty($_POST['colonia']) && !empty($_POST['calle']) && !empty($_POST['numexterior']) && !empty($_POST['cp'])) {
-
-    $mysql = "INSERT INTO direccion (idcliente,estado,municipio,colonia,calle,numexterior,numinterior,lote,manzana,edificio,numpiso,cp) VALUES (:id,:estado,:municipio,:colonia,:calle,:numexterior,:numinterior,:lote,:manzana,:edificio,:numpiso,:cp)";
+    
+    $mysql = "UPDATE direccion SET estado=:estado, municipio=:municipio, colonia=:colonia, calle=:calle, numexterior=:numexterior, numinterior=:numinterior, lote=:lote, manzana=:manzana, edificio=:edificio, numpiso=:numpiso, cp=:cp WHERE direccion.iddireccion = :idd";
 
     $agregard = $conn->prepare($mysql);
 
-
-    $agregard->bindParam(':id', $_SESSION['user_id']);
+    $num=$direccion['iddireccion'];
+    $agregard->bindParam(':idd', $num);
 
     $agregard->bindParam(':estado', $_POST['estado']);
     $agregard->bindParam(':municipio', $_POST['municipio']);
@@ -27,11 +38,12 @@ if (!empty($_POST['estado']) && !empty($_POST['municipio'])  && !empty($_POST['c
 
 
     if ($agregard->execute()) {
-        $message = 'Direccion agregada';
+        $message = 'Direccion actualizada';
     } else {
-        $message = 'Error al guardar direccion';
+        $message = 'Error al actualizar direccion';
     }
 }
+
 
 ?>
 
@@ -71,50 +83,50 @@ if (!empty($_POST['estado']) && !empty($_POST['municipio'])  && !empty($_POST['c
                 <?php if (!empty($message)) : ?>
                     <p> <?= $message ?></p>
                 <?php else : ?>
-                    <form class="row g-3" action="perfil_direcciones_nueva.php" method="POST">
+                    <form class="row g-3" action="perfil_direcciones_editar.php?iddireccion=<?php echo $direccion['iddireccion']; ?>" method="POST">
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault01" class="form-label fw-bold">Calle:* </label>
-                            <input type="text" class="form-control text-muted" id="validationDefault01" placeholder="Calle..." name="calle" required>
+                            <input type="text" class="form-control text-muted" id="validationDefault01" placeholder="Calle..." name="calle" required value=<?= $direccion['calle']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Colonia:*</label>
-                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Colonia..." name="colonia" required>
+                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Colonia..." name="colonia" required value=<?= $direccion['colonia']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Numero exterior:*</label>
-                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Numero exterior..." name="numexterior" required>
+                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Numero exterior..." name="numexterior" required value=<?= $direccion['numexterior']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Numero interior:</label>
-                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Numero interior..." name="numinterior">
+                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Numero interior..." name="numinterior" value=<?= $direccion['numinterior']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault01" class="form-label fw-bold">Municipio:* </label>
-                            <input type="text" class="form-control text-muted" id="validationDefault01" placeholder="Municipio..." name="municipio" required>
+                            <input type="text" class="form-control text-muted" id="validationDefault01" placeholder="Municipio..." name="municipio" required value=<?= $direccion['municipio']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Estado:* </label>
-                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Estado..." name="estado" required>
+                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Estado..." name="estado" required value=<?= $direccion['estado']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Codigo Postal:* </label>
-                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="C.P..." name="cp">
+                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="C.P..." name="cp" value=<?= $direccion['cp']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Lote: </label>
-                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Lote..." name="lote">
+                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Lote..." name="lote" value=<?= $direccion['lote']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Manzana: </label>
-                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Manzana..." name="manzana">
+                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Manzana..." name="manzana" value=<?= $direccion['manzana']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Edificio: </label>
-                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Edificio..." name="edificio">
+                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Edificio..." name="edificio" value=<?= $direccion['edificio']; ?>>
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Numero de piso: </label>
-                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Numero de piso..." name="numpiso">
+                            <input type="text" class="form-control text-muted" id="validationDefault02" placeholder="Numero de piso..." name="numpiso" value=<?= $direccion['numpiso']; ?>>
                         </div>
                         <div class="col-12">
                             <button class="btn btn-outline-primary" type="submit">Guardar</button>

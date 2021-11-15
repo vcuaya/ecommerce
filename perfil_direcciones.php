@@ -83,7 +83,7 @@ if ($user == null) {
                             </div>
                             <div class="position-relative">
                                 <a class="btn btn-danger" href="direcciones/borrar.php?iddireccion=<?php echo $row->iddireccion; ?>"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
-                                <a href="perfil_direcciones_editar.php" class="btn btn-outline-primary bottom-0 end-0 boton1">Editar</a>
+                                <a href="perfil_direcciones_editar.php?iddireccion=<?php echo $row->iddireccion; ?>" class="btn btn-outline-primary bottom-0 end-0 boton1">Editar</a>
                             </div>
                         </div>
 

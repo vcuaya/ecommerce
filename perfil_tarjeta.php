@@ -1,5 +1,21 @@
 <?php require 'partials/header.php' ?>
 <?php
+$tarjeta = null;
+
+if (isset($_SESSION['user_id'])) {
+    $records3 = $conn->prepare('SELECT *  FROM pago WHERE idcliente = :id');
+    $records3->bindParam(':id', $user['idcliente']);
+    $records3->execute();
+    $results3 = $records3->fetch(PDO::FETCH_ASSOC);
+
+    if (is_array($results3)) {
+        if (count($results3) > 0) {
+            $tarjeta = $results3;
+        }
+    }
+}
+
+
 if ($user == null) {
     header("Location: vistas/vistalogin.php");
 }
@@ -33,25 +49,50 @@ if ($user == null) {
                 <h2 class="fw-bold">Tarjetas</h2>
             </div>
             <hr>
-            <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1">
-                <div class="col-md-6 col-lg-6 d-inline">
-                    <label class="form-label datos fw-bold">Tarjeta 1 : </label>
-                    <div class="shadow-sm p-3 mb-5 bg-body rounded text-muted informacion ">Nombre: Benito Bokuen
-                        DaBoken<br>
-                        No.Tarjeta: 2364 2934 2857 2048 <br> Vigencia: 09/23 <br>
+
+            <?php if (!empty($tarjeta)) : ?>
+
+                <?php
+                include("direcciones/funciones.php");
+                ?>
+                <?php
+                $sql = "select * from pago where idcliente =" . $user['idcliente'] . "";
+                $result = db_query($sql);
+                $contador = 1;
+                while ($row = mysqli_fetch_object($result)) {
+                ?>
+
+                    <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1">
+                        <div class="col-md-6 col-lg-6 d-inline">
+                            <label class="form-label datos fw-bold">Tarjeta <?php echo $contador ?> : </label>
+                            <div class="shadow-sm p-3 mb-5 bg-body rounded text-muted informacion ">Nombre: <?php echo $row->nombre; ?><br>
+                                No.Tarjeta: <?php echo $row->numerotarjeta; ?> <br> Vigencia: <?php echo $row->mesvencimiento; ?>/<?php echo $row->yearvencimiento; ?> <br>
+                            </div>
+                            <div class="position-relative">
+                                <a class="btn btn-danger bottom-0 end-0 boton1 position-relative" href="direcciones/borrartarjeta.php?idpago=<?php echo $row->idpago; ?>"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
+                                <a href="perfil_tarjeta_editar.php?idpago=<?php echo $row->idpago; ?>" class="btn btn-outline-primary position-relative bottom-0 end-0 boton1" style="width: 100px;">Actualizar</a>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="position-relative">
-                        <a href="perfil_tarjeta_editar.php" class="btn btn-outline-primary position-absolute bottom-0 end-0 boton1">Editar</a>
-                    </div>
+
+
+
+                <?php $contador += 1;
+                } ?>
+
+                <div>
+                    <b>Agregar nueva tarjeta</b>
+                    <a href="perfil_tarjeta_nueva.php">Agregar tarjeta</a>
                 </div>
 
-            </div>
+            <?php else : ?>
+                <div style="border: gray 2px solid; margin: 30px;">
+                    <b>No tiene tarjetas registradas</b>
+                    <a href="perfil_tarjeta_nueva.php">Agregar tarjeta</a>
+                </div>
+            <?php endif; ?>
 
-
-        </div>
-        <div>
-            <b>Agregar nueva tarjeta</b>
-            <a href="perfil_tarjeta_nueva.php">Agregar tarjeta</a>
         </div>
     </div>
 </div>
