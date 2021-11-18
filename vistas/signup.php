@@ -1,9 +1,15 @@
 
 <?php
 
-  require '../conexion/database.php';
+  require_once '../conexion/database.php';
 
   $message = '';
+  //include("../direcciones/funciones.php");
+  function get_post($conn, $var) { 
+    return $conn->real_escape_string($_POST[$var]); 
+  } 
+ 
+  $u = get_post($conn, 'user');
 
   if(!empty($_POST['user']) && !empty($_POST['correo']) && !empty($_POST['nombre']) && !empty($_POST['paterno']) && !empty($_POST['password'])){
     
@@ -27,6 +33,7 @@
     }
 
   }
+  
 ?>
 
 

@@ -120,7 +120,8 @@ if (is_array($resultsc)) {
           </div>
         </div><br>
       <?php $contador += 1;
-      } ?>
+      } $result->close(); 
+      ?>
 
     <?php else : ?>
       <div style="border: gray 2px solid; margin: 30px;">

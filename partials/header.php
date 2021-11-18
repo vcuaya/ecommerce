@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'conexion/database.php';
+require_once 'conexion/database.php';
 $user = null;
 
 if (isset($_SESSION['user_id'])) {

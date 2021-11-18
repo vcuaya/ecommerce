@@ -9,7 +9,7 @@
     header('Location: agregarProducto.php');
   }
 
-  require '../conexion/database.php';
+  require_once '../conexion/database.php';
 
   if (!empty($_POST['email']) && !empty($_POST['password'])) {
     $results = NULL;

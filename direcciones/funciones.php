@@ -2,6 +2,7 @@
 function db_query($query) {
     $connection = mysqli_connect("localhost","root","","ecommerce");
     $result = mysqli_query($connection,$query);
+	$connection->close();
 
     return $result;
 }
@@ -20,4 +21,8 @@ function select_id($tblname,$field_name,$field_id){
 
 	return $sql;
 }
+
+function get_post($conn, $var) { 
+	return $conn->real_escape_string($_POST[$var]); 
+} 
 ?>
