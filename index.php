@@ -93,7 +93,7 @@ if (is_array($resultsc)) {
 
 
 
-  <div class="container">
+  <div class="container w-75">
     <?php if (!empty($categorias)) : ?>
 
       <?php
@@ -105,11 +105,12 @@ if (is_array($resultsc)) {
       $contador = 1;
       while ($row = mysqli_fetch_object($result)) {
       ?>
-        <div class="text-center">
+        <div class="text-center  mb-4">
           <div>
-            <a href="productos.php?idcategoria=<?php echo $row->idcategoria; ?>" style="text-decoration: none;">
-              <div class="card" style="background-image: url('<?php echo $row->imagen?>')">
+            <a class="w-10" href="productos.php?idcategoria=<?php echo $row->idcategoria; ?>" style="text-decoration: none;">
+              <div class="card" style="    background-size: cover; background-position: center ; background-image: url('<?php echo $row->imagen ?>')">
                 <div class="card-body" style="background-color: rgba(0,0,0,0.5);">
+                  <br>
                   <h5 class="card-title" style="font-weight: bold; color: white;"><?php echo $row->nombrecat; ?></h5>
                   <p class="card-text" style=" color: white;"><?php echo $row->descripcion; ?></p>
                   <br>
@@ -118,9 +119,10 @@ if (is_array($resultsc)) {
             </a>
 
           </div>
-        </div><br>
+        </div>
       <?php $contador += 1;
-      } $result->close(); 
+      }
+      $result->close();
       ?>
 
     <?php else : ?>

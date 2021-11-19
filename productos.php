@@ -42,7 +42,7 @@ if (isset($_GET['idcategoria'])) {
 
     <?php
     } ?>
-
+</div>
 
 
     <?php require 'partials/footer.php' ?>
