@@ -16,43 +16,45 @@ if (is_array($resultsc)) {
   <div class="container mt-3">
     <div class="row">
       <div class="col-12">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleControls" data-slide-to="1"></li>
-            <li data-target="#carouselExampleControls" data-slide-to="2"></li>
-          </ol>
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="d-block w-100" src="images/1920x500.gif" alt="First slide">
+              <img class="d-block w-100" src="images/portada5.jpg" alt="First slide">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Banner 1 Heading</h5>
                 <p>Banner 1 Descripci&oacute;n</p>
               </div>
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="images/1920x500.gif" alt="Second slide">
+              <img class="d-block w-100" src="images/portada3.jpg" alt="Second slide">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Banner 2 Heading</h5>
                 <p>Banner 2 Descripci&oacute;n</p>
               </div>
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="images/1920x500.gif" alt="Third slide">
+              <img class="d-block w-100" src="images/portada4.png" alt="Third slide">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Banner 3 Heading</h5>
                 <p>Banner 3 Descripci&oacute;n</p>
               </div>
             </div>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Siguiente</span>
-          </a>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
       </div>
     </div>

@@ -1,3 +1,37 @@
+<?php
+session_start();
+
+require_once 'conexion/database.php';
+$user = null;
+
+if (isset($_SESSION['user_id'])) {
+  $records = $conn->prepare('SELECT * FROM cliente WHERE idcliente = :id');
+  $records->bindParam(':id', $_SESSION['user_id']);
+  $records->execute();
+  $results = $records->fetch(PDO::FETCH_ASSOC);
+
+
+  if (count($results) > 0) {
+    $user = $results;
+  }
+}
+
+if (isset($_GET['idproducto'])) {
+  $idp = $_GET['idproducto'];
+  $recordsd = $conn->prepare('SELECT p.precioventa, p.modelo, p.numparte, p.descripcion, p.alto, p.ancho, p.largo, p.name,p.peso, m.nombremarc FROM producto AS p INNER JOIN marca AS m ON p.idmarca = m.idmarca AND p.idproducto=:idp');
+  $recordsd->bindParam(':idp', $idp);
+  $recordsd->execute();
+  $resultsd = $recordsd->fetch(PDO::FETCH_ASSOC);
+
+
+
+  if (count($resultsd) > 0) {
+    $producto = $resultsd;
+  }
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -7,8 +41,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -21,16 +54,16 @@
   <script src="js/jquery.etalage.min.js"></script>
   <!-- Include the Etalage files -->
   <script>
-    jQuery(document).ready(function ($) {
+    jQuery(document).ready(function($) {
 
       $('#etalage').etalage({
-        thumb_image_width: 300,
-        thumb_image_height: 400,
+        thumb_image_width: 350,
+        thumb_image_height: 250,
 
 
       });
       // This is for the dropdown list example:
-      $('.dropdownlist').change(function () {
+      $('.dropdownlist').change(function() {
         etalage_show($(this).find('option:selected').attr('class'));
       });
 
@@ -44,18 +77,15 @@
 <body>
   <nav class="row navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid ">
-      <a class="navbar-brand col-md-4 col-lg-5  logo-link" href="#">
-        <img src="logos/logo_narvar.png" alt="logo" width="52" height="28" class="d-inline-block align-text-top ">
-        E-commerce
+      <a class="navbar-brand col-md-4 col-lg-5  logo-link" href="index.php">
+        <img src="logos/logo_narvar.png" alt="logo" width="52" height="28" class="d-inline-block align-text-top "> E-commerce
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="container-fluid collapse navbar-collapse col-md-4 col-lg-4 col-12 mt-1 mb-1 justify-content-end"
-        id="navbarNavDropdown">
+      <div class="container-fluid collapse navbar-collapse col-md-4 col-lg-4 col-12 mt-1 mb-1 justify-content-end" id="navbarNavDropdown">
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
           <button class="btn btn-outline-primary" type="submit">Buscar</button>
@@ -66,7 +96,7 @@
       <div class="collapse navbar-collapse col-lg-4 justify-content-end barra" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item menu_colapsable">
-            <a class="nav-link active " aria-current="page" href="index2.html">Inicio</a>
+            <a class="nav-link active " aria-current="page" href="index.php">Inicio</a>
           </li>
           <li class="nav-item menu_colapsable">
             <a class="nav-link" href="carrito.html">Carrito</a>
@@ -75,15 +105,24 @@
             <a class="nav-link" href="acerca_de.html">Acerca de</a>
           </li>
           <div class="vr"></div>
+
+          <!-- Aqui se aplica la condicion de que si esta logeado muestre el nombre del usuario -->
           <li class="nav-item dropdown menu_colapsable">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Ajustes <i class="fas fa-user-circle"></i>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="inicio_sesion.html">Iniciar Sesión</a></li>
-              <li><a class="dropdown-item" href="#">Salir</a></li>
-              <li><a class="dropdown-item" href="perfil.html">Cuenta</a></li>
+
+
+              <?php if ($user == NULL) : ?>
+                <li><a class="dropdown-item" href="vistas/vistalogin.php">Iniciar Sesión</a></li>
+              <?php else : ?>
+                <li>
+                  <div class="container fw-bold"> Hola <?= $user['user']; ?></div>
+                </li>
+                <li><a class="dropdown-item" href="perfil.php">Cuenta</a></li>
+                <li><a class="dropdown-item" href="logout.php">Salir</a></li>
+              <?php endif; ?>
             </ul>
           </li>
         </ul>
@@ -103,50 +142,32 @@
         <div class="col-md-9 col-lg-9 d-none d-lg-block d-xl-block single_left">
           <div class="single_image">
             <ul id="etalage">
-              <li>
-                <img class="etalage_thumb_image" src="images/productos/plomeria1.jpeg" />
-                <img class="etalage_source_image" src="images/productos/plomeria1.jpeg" />
-              </li>
-              <li>
-                <img class="etalage_thumb_image" src="images/productos/plomeria2.jpeg" />
-                <img class="etalage_source_image" src="images/productos/plomeria2.jpeg" />
-              </li>
-              <li>
-                <img class="etalage_thumb_image" src="images/productos/plomeria3.jpeg" />
-                <img class="etalage_source_image" src="images/productos/plomeria3.jpeg" />
-              </li>
-              <li>
-                <img class="etalage_thumb_image" src="images/productos/plomeria4.jpeg" />
-                <img class="etalage_source_image" src="images/productos/plomeria4.jpeg" />
-              </li>
-              <li>
-                <img class="etalage_thumb_image" src="images/productos/plomeria5.jpeg" />
-                <img class="etalage_source_image" src="images/productos/plomeria5.jpeg" />
-              </li>
-              <li>
-                <img class="etalage_thumb_image" src="images/productos/plomeria6.jpeg" />
-                <img class="etalage_source_image" src="images/productos/plomeria6.jpeg" />
-              </li>
-              <li>
-                <img class="etalage_thumb_image" src="images/productos/plomeria7.jpeg" />
-                <img class="etalage_source_image" src="images/productos/plomeria7.jpeg" />
-              </li>
+              <?php
+              include("direcciones/funciones.php");
+              ?>
+              <?php
+              $sql = "SELECT * FROM imagenes WHERE idproducto= " . $idp . "";
+              $result = db_query($sql);
+              while ($row = mysqli_fetch_object($result)) {
+              ?>
+                <li>
+                  <img class="etalage_thumb_image" src="<?php echo $row->lugar ?>" />
+                  <img class="etalage_source_image" src="<?php echo $row->lugar ?>" />
+                </li>
+              <?php
+              } ?>
             </ul>
           </div>
         </div>
         <!-- termina el slider del producto -->
         <div class="single_right col-md-3 col-lg-3 col-xs-12 ">
-          <h3>Nombre del producto</h3>
-          <p class="no_parte text-muted">09348578</p>
-          <p class="m_10">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
-            minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
-            ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit
-            esse
+          <h3><?= $producto['name']; ?></h3>
+          <p class="no_parte text-muted"><?= $producto['numparte']; ?></p>
+          <p class="m_10"><?= $producto['descripcion']; ?>
           </p>
           <div class="col-md-5">
             <div class="box-info-product">
-              <p class="price2">$130.25</p>
+              <p class="price2">$<?= $producto['precioventa']; ?></p>
               <ul class="prosuct-qty">
                 <span>Cantidad :</span>
                 <select>
@@ -173,15 +194,7 @@
       </div>
       <div class="desc">
         <h4>Descripción del Producto</h4>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-          ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-          tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum
-          iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
-          feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-          luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta
-          nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
-          Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.
-          Investigationes demonstraverunt lectores</p>
+        <p><?= $producto['descripcion']; ?></p>
       </div>
 
       <div class="clear"> </div>
@@ -192,47 +205,47 @@
           <thead>
             <tr>
               <th scope="col">Categoria</th>
-              <th scope="col">Especificación</th>          
+              <th scope="col">Especificación</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">Nombre</th>
-              <td>Nombre del Producto</td>        
+              <td><?= $producto['name']; ?></td>
             </tr>
             <tr>
               <th scope="row">Marca</th>
-              <td>Marca generica</td>           
+              <td><?= $producto['nombremarc']; ?></td>
             </tr>
             <tr>
               <th scope="row">Modelo</th>
-              <td colspan="2">M-23oihdl</td>
+              <td colspan="2"><?= $producto['modelo']; ?></td>
             </tr>
             <tr>
               <th scope="row">No.Parte</th>
-              <td>20049583</td>           
+              <td><?= $producto['numparte']; ?></td>
             </tr>
             <thead>
               <tr>
                 <th scope="col">Empaquetado</th>
-                <th scope="col">Dimensiones</th>         
+                <th scope="col">Dimensiones</th>
               </tr>
             </thead>
             <tr>
               <th scope="row">Largo</th>
-              <td colspan="2">30 cm</td>
+              <td colspan="2"><?= $producto['largo']; ?></td>
             </tr>
             <tr>
               <th scope="row">Ancho</th>
-              <td colspan="2">20 cm</td>
+              <td colspan="2"><?= $producto['ancho']; ?></td>
             </tr>
             <tr>
               <th scope="row">Alto</th>
-              <td colspan="2">25 cm</td>
+              <td colspan="2"><?= $producto['alto']; ?></td>
             </tr>
             <tr>
               <th scope="row">Peso</th>
-              <td colspan="2">5 kg</td>
+              <td colspan="2"><?= $producto['peso']; ?>kg</td>
             </tr>
           </tbody>
         </table>
@@ -251,11 +264,11 @@
   <div class="p-1 fondo-footer">
     <footer class="py-3 my-4">
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="index2.html" class="nav-link px-2 text-white">Inicio</a></li>
+        <li class="nav-item"><a href="index.php" class="nav-link px-2 text-white">Inicio</a></li>
         <li class="nav-item"><a href="carrito.html" class="nav-link px-2 text-white">Carrito</a></li>
         <li class="nav-item"><a href="catalogo.html" class="nav-link px-2 text-white">Catálogo</a></li>
         <li class="nav-item"><a href="acerca_de.html" class="nav-link px-2 text-white">Acerca de</a></li>
-        <li class="nav-item"><a href="perfil.html" class="nav-link px-2 text-white">Cuenta</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Cuenta</a></li>
       </ul>
       <p class="text-center text-muted">© 2021 E-commerce, Inc</p>
     </footer>
@@ -265,9 +278,7 @@
   <!-- Optional JavaScript; choose one of the two! -->
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/d02273941b.js" crossorigin="anonymous"></script>
   <!-- Option 2: Separate Popper and Bootstrap JS -->
   <!--
