@@ -211,19 +211,11 @@ if (isset($_GET['idproducto'])) {
           <tbody>
             <tr>
               <th scope="row">Nombre</th>
-<<<<<<< HEAD:producto.php
               <td><?= $producto['name']; ?></td>
             </tr>
             <tr>
               <th scope="row">Marca</th>
               <td><?= $producto['nombremarc']; ?></td>
-=======
-              <td>Nombre del Producto</td>
-            </tr>
-            <tr>
-              <th scope="row">Marca</th>
-              <td>Marca generica</td>
->>>>>>> 6b18939c808d985a53126865cb290434aebe1cf4:producto.html
             </tr>
             <tr>
               <th scope="row">Modelo</th>
@@ -231,11 +223,7 @@ if (isset($_GET['idproducto'])) {
             </tr>
             <tr>
               <th scope="row">No.Parte</th>
-<<<<<<< HEAD:producto.php
               <td><?= $producto['numparte']; ?></td>
-=======
-              <td>20049583</td>
->>>>>>> 6b18939c808d985a53126865cb290434aebe1cf4:producto.html
             </tr>
             <thead>
               <tr>
