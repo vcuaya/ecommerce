@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <script src="js/jquery.min.js"></script>
+
+  <!----details-product-slider--->
+  <!-- Include the Etalage files -->
+  <link rel="stylesheet" href="css/etalage.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery.etalage.min.js"></script>
+  <!-- Include the Etalage files -->
+  <script>
+    jQuery(document).ready(function ($) {
+
+      $('#etalage').etalage({
+        thumb_image_width: 300,
+        thumb_image_height: 400,
+
+
+      });
+      // This is for the dropdown list example:
+      $('.dropdownlist').change(function () {
+        etalage_show($(this).find('option:selected').attr('class'));
+      });
+
+    });
+  </script>
+</head>
+
+
+
+
+<body>
+  <nav class="row navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid ">
+      <a class="navbar-brand col-md-4 col-lg-5  logo-link" href="#">
+        <img src="logos/logo_narvar.png" alt="logo" width="52" height="28" class="d-inline-block align-text-top ">
+        E-commerce
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="container-fluid collapse navbar-collapse col-md-4 col-lg-4 col-12 mt-1 mb-1 justify-content-end"
+        id="navbarNavDropdown">
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </form>
+      </div>
+
+
+      <div class="collapse navbar-collapse col-lg-4 justify-content-end barra" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item menu_colapsable">
+            <a class="nav-link active " aria-current="page" href="index2.html">Inicio</a>
+          </li>
+          <li class="nav-item menu_colapsable">
+            <a class="nav-link" href="carrito.html">Carrito</a>
+          </li>
+          <li class="nav-item menu_colapsable">
+            <a class="nav-link" href="acerca_de.html">Acerca de</a>
+          </li>
+          <div class="vr"></div>
+          <li class="nav-item dropdown menu_colapsable">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Ajustes <i class="fas fa-user-circle"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="inicio_sesion.html">Iniciar Sesión</a></li>
+              <li><a class="dropdown-item" href="#">Salir</a></li>
+              <li><a class="dropdown-item" href="perfil.html">Cuenta</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <hr class="navegacion">
+
+  <div></div>
+
+
+
+
+  <div class="shop_top">
+    <div class="container">
+      <div class="row d-inline">
+        <div class="col-md-9 col-lg-9 d-none d-lg-block d-xl-block single_left">
+          <div class="single_image">
+            <ul id="etalage">
+              <li>
+                <img class="etalage_thumb_image" src="images/productos/plomeria1.jpeg" />
+                <img class="etalage_source_image" src="images/productos/plomeria1.jpeg" />
+              </li>
+              <li>
+                <img class="etalage_thumb_image" src="images/productos/plomeria2.jpeg" />
+                <img class="etalage_source_image" src="images/productos/plomeria2.jpeg" />
+              </li>
+              <li>
+                <img class="etalage_thumb_image" src="images/productos/plomeria3.jpeg" />
+                <img class="etalage_source_image" src="images/productos/plomeria3.jpeg" />
+              </li>
+              <li>
+                <img class="etalage_thumb_image" src="images/productos/plomeria4.jpeg" />
+                <img class="etalage_source_image" src="images/productos/plomeria4.jpeg" />
+              </li>
+              <li>
+                <img class="etalage_thumb_image" src="images/productos/plomeria5.jpeg" />
+                <img class="etalage_source_image" src="images/productos/plomeria5.jpeg" />
+              </li>
+              <li>
+                <img class="etalage_thumb_image" src="images/productos/plomeria6.jpeg" />
+                <img class="etalage_source_image" src="images/productos/plomeria6.jpeg" />
+              </li>
+              <li>
+                <img class="etalage_thumb_image" src="images/productos/plomeria7.jpeg" />
+                <img class="etalage_source_image" src="images/productos/plomeria7.jpeg" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- termina el slider del producto -->
+        <div class="single_right col-md-3 col-lg-3 col-xs-12 ">
+          <h3>Nombre del producto</h3>
+          <p class="no_parte text-muted">09348578</p>
+          <p class="m_10">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
+            minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
+            ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit
+            esse
+          </p>
+          <div class="col-md-5">
+            <div class="box-info-product">
+              <p class="price2">$130.25</p>
+              <ul class="prosuct-qty">
+                <span>Cantidad :</span>
+                <select>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                </select>
+              </ul>
+              <div class="btn_form text-center">
+                <form>
+                  <input type="submit" value="Añadir a carrito" title="">
+                </form>
+              </div>
+            </div>
+          </div>
+          <br>
+
+        </div>
+        <div class="clear"> </div>
+
+      </div>
+      <div class="desc">
+        <h4>Description del Producto</h4>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+          ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+          tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum
+          iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
+          feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
+          luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta
+          nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+          Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.
+          Investigationes demonstraverunt lectores</p>
+      </div>
+
+      <div class="clear"> </div>
+      <div>
+        <h3>Especificaciones</h3>
+        <hr>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Categoria</th>
+              <th scope="col">Especificación</th>          
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Nombre</th>
+              <td>Nombre del Producto</td>        
+            </tr>
+            <tr>
+              <th scope="row">Marca</th>
+              <td>Marca generica</td>           
+            </tr>
+            <tr>
+              <th scope="row">Modelo</th>
+              <td colspan="2">M-23oihdl</td>
+            </tr>
+            <tr>
+              <th scope="row">No.Parte</th>
+              <td>20049583</td>           
+            </tr>
+            <thead>
+              <tr>
+                <th scope="col">Empaquetado</th>
+                <th scope="col">Dimensiones</th>         
+              </tr>
+            </thead>
+            <tr>
+              <th scope="row">Largo</th>
+              <td colspan="2">30 cm</td>
+            </tr>
+            <tr>
+              <th scope="row">Ancho</th>
+              <td colspan="2">20 cm</td>
+            </tr>
+            <tr>
+              <th scope="row">Alto</th>
+              <td colspan="2">25 cm</td>
+            </tr>
+            <tr>
+              <th scope="row">Peso</th>
+              <td colspan="2">5 kg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="p-1 fondo-footer">
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="index2.html" class="nav-link px-2 text-white">Inicio</a></li>
+        <li class="nav-item"><a href="carrito.html" class="nav-link px-2 text-white">Carrito</a></li>
+        <li class="nav-item"><a href="catalogo.html" class="nav-link px-2 text-white">Catálogo</a></li>
+        <li class="nav-item"><a href="acerca_de.html" class="nav-link px-2 text-white">Acerca de</a></li>
+        <li class="nav-item"><a href="perfil.html" class="nav-link px-2 text-white">Cuenta</a></li>
+      </ul>
+      <p class="text-center text-muted">© 2021 E-commerce, Inc</p>
+    </footer>
+  </div>
+
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/d02273941b.js" crossorigin="anonymous"></script>
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

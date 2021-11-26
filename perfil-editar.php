@@ -82,7 +82,7 @@ if (!empty($_POST['correo']) || !empty($_POST['user'])  || !empty($_POST['tel'])
 
                         <div class="col-md-6 mb-5">
                             <label class="form-label datos fw-bold">RFC : </label>
-                            <input type="text" class="form-control" id="rfc" placeholder="RFC..." name="rfc" value=<?= $user['rfc']; ?>>
+                            <input type="text" class="form-control" id="rfc" maxlength="13" placeholder="RFC..." name="rfc" value=<?= $user['rfc']; ?>>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label datos fw-bold">Fecha de Nacimiento : </label>
@@ -105,7 +105,7 @@ if (!empty($_POST['correo']) || !empty($_POST['user'])  || !empty($_POST['tel'])
                         <br>
 
                         <div class="container position-relative mt-3">
-                            <button class="btn btn-outline-success boton1" type="submit" name="send">guardar</button>
+                            <button class="btn btn-outline-primary p-" type="submit" name="send">guardar</button>
                             <a href="perfil.php" class="btn btn-outline-danger boton1">Cancelar</a>
                         </div>
 

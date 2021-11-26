@@ -67,7 +67,7 @@ if ($user == null) {
                 </div>
                 <br>
                 <div class="position-relative">
-                    <a href="perfil-editar.php" class="btn btn-outline-danger position-absolute bottom-0 end-0 boton1">Editar</a>
+                    <a href="perfil-editar.php" class="btn btn-outline-primary position-absolute bottom-0 end-0 boton1">Editar</a>
                 </div>
 
             </div>

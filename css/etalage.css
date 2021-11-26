@@ -1,0 +1,131 @@
+/* Large thumbnail: */
+#etalage .etalage_thumb{
+	background:url(../images/loading.gif) center no-repeat;
+	border: 1px solid #eee;
+	padding: 6px;
+}
+
+
+/* Small thumbnails: */
+#etalage .etalage_small_thumbs li{
+	border: 1px solid #ddd;
+	margin: 10px;
+	padding: 3px;
+}
+
+/* Zoomed image area: */
+#etalage .etalage_zoom_area,
+.etalage_zoom_area{
+	background: white url(../images/loading.gif) center no-repeat;
+	border: 1px solid #EEE;
+	padding: 6px;
+}
+
+/* Magnifier area (thumbnail hovering rectangle): */
+#etalage .etalage_magnifier{
+	background: white;
+	border: 1px solid #eee;
+}
+
+/*
+ * ------------------------------------ FUNCTIONALITY --------------------------------------
+ * The following CSS serves to make Etalage function properly. Don't edit or edit carefully.
+ * -----------------------------------------------------------------------------------------
+ */
+
+.etalage, .etalage_thumb, .etalage_thumb_image, .etalage_source_image, .etalage_zoom_preview, .etalage_icon, .etalage_hint{ display:none }
+.etalage, .etalage ul, .etalage li, .etalage img, .etalage_hint, .etalage_icon, .etalage_description{ margin:0; padding:0; border:0; list-style:none }
+.etalage, .etalage_magnifier div, .etalage_magnifier div img, .etalage_small_thumbs ul, ul .etalage_small_thumbs li, .etalage_zoom_area div, .etalage_zoom_img{ position:relative }
+.etalage img, .etalage li{ -webkit-user-select:none; -khtml-user-select:none; -moz-user-select:none; -o-user-select:none; user-select:none; -webkit-user-drag:none; -moz-user-drag:none;}
+.etalage, .etalage_small_thumbs li{ float:left }
+.etalage_right{ float:right }
+.etalage li{ position:absolute }
+.etalage img{ vertical-align:bottom; max-width:none }
+.etalage_magnifier{ cursor:default }
+.etalage_magnifier div, .etalage_small_thumbs{ overflow:hidden }
+.etalage_magnifier div img{ display:none }
+.etalage_icon, .etalage_hint{ cursor:default; width:0; height:0; overflow:hidden }
+.etalage_small_thumbs li.vertical{ float:none }
+.etalage_zoom_area{ z-index:996 }
+.etalage_zoom_area div{ overflow:hidden; z-index:997 }
+.etalage_zoom_preview{ position:absolute; z-index:998 }
+.etalage_zoom_img, .etalage_hint{ z-index:999 }
+.etalage{ direction:ltr }
+div.etalage_description{ position:absolute; bottom:0; left:0; z-index:999 }
+div.etalage_description.rtl{ direction:rtl; text-align:right }
+
+.fondo-footer{
+    background: #171a24;
+}
+.navegacion{
+    size: 2px;
+    width: 97%;
+    margin: 0 auto;
+}
+
+.menu_colapsable{
+    padding-left: 10px;
+}
+
+.logo-link{
+    max-width: 170px;
+    padding-left: 10px;
+}
+
+/*--shop--*/
+.shop_top{
+	padding:5% 0;
+}
+
+
+/*--single--*/
+.single_image{
+	width:36.5%;
+	float: left;
+	margin-right: 2.6%;
+}
+.single_right{
+	width: 60.5%;
+	float: left;
+}
+.single_right h3{
+	color: #222;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	font-weight: 700;
+}
+
+/*botón */
+.btn_form{
+	margin-bottom:5%;
+}
+.btn_form form input[type="submit"] {
+	font-family: 'Open Sans', sans-serif;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	display: inline-block;
+	font-size: 0.85em;
+	padding: 10px 30px;
+	background: #333;
+	color: #FFF;
+	text-transform: uppercase;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+.btn_form form input[type="submit"]:hover {
+	background: #00abfa;
+}
+
+.clear{clear: both;}
+
+.desc {
+	margin: 20px 0;
+}
+
+.no_parte{
+	font-size: .8em;
+}

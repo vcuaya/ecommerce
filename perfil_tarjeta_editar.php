@@ -137,7 +137,7 @@ if (!empty($_POST['nombre'])  && !empty($_POST['banco'])  && !empty($_POST['nume
                     <form action="perfil_tarjeta_editar.php?idpago=<?php echo $tarjeta['idpago']; ?>" method="POST" id="formulario-tarjeta" class="formulario-tarjeta">
                         <div class="grupo">
                             <label for="inputNumero">Número Tarjeta</label>
-                            <input type="text" id="inputNumero" maxlength="19" autocomplete="off" name="numerotarjeta">
+                            <input type="text" id="inputNumero" maxlength="19" autocomplete="off" name="numerotarjeta"> 
                         </div>
                         <div class="grupo">
                             <label for="inputNombre">Banco</label>

@@ -56,7 +56,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="container-fluid collapse navbar-collapse col-md-4 col-lg-4 col-12 mt-1 mb-1 justify-content-end" id="navbarNavDropdown">
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                    <button class="btn btn-outline-danger" type="submit">Buscar</button>
+                    <button class="btn btn-outline-primary" type="submit">Buscar</button>
                 </form>
             </div>
 
