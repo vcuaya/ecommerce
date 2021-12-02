@@ -30,7 +30,9 @@ if (isset($_GET['idcategoria'])) {
         <div class=" row text-center">
             <div class="col-md-4 pb-1 pb-md-0">
                 <div class="card">
+                    <a href="producto.php?idproducto=<?php echo $row->idproducto; ?>">
                     <img class="card-img-top" src="<?php echo $row->imagen ?>" alt="Card image cap">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $row->name ?></h5>
                         <p class="card-text"><?php echo $row->precioventa  ?></p>
@@ -42,15 +44,6 @@ if (isset($_GET['idcategoria'])) {
 
     <?php
     } ?>
-</div>
-
-<div class="card" style="width: 18rem;">
-  <img src="images/imgpro/laptop_msi.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
 </div>
 
 
