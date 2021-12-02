@@ -20,31 +20,62 @@ if ($user == null) {
 }
 
 if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['precioventa']) && !empty($_POST['upc']) && !empty($_POST['numparte']) && !empty($_POST['descripcion']) && !empty($_POST['alto']) && !empty($_POST['ancho']) && !empty($_POST['largo']) && !empty($_POST['idcatalago']) && !empty($_POST['idcategoria']) && !empty($_POST['idmarca'])) {
+  if ($_FILES["imagen"]) {
+    $nombre_base = basename($_FILES["imagen"]["name"]);
+    $nombre_final = date("m-d-y") . "-" . date("H-i-s") . "-" . $nombre_base;
+    $ruta = "../images/imgpro/" . $nombre_final;
+    $ruta2 = "images/imgpro/" . $nombre_final;
+    $subirarchivo = move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
+    if ($subirarchivo) {
+      $mysql = "INSERT INTO producto (name, preciocompra, precioventa, upc, numparte, descripcion, alto, ancho, largo, idcatalago, idcategoria, idmarca, imagen) VALUES (:name, :preciocompra, :precioventa, :upc, :numparte, :descripcion, :alto, :ancho, :largo, :idcatalago, :idcategoria, :idmarca, :imagen)";
 
-  $mysql = "INSERT INTO producto (name, preciocompra, precioventa, upc, numparte, descripcion, alto, ancho, largo, idcatalago, idcategoria, idmarca, imagen) VALUES (:name, :preciocompra, :precioventa, :upc, :numparte, :descripcion, :alto, :ancho, :largo, :idcatalago, :idcategoria, :idmarca, :imagen)";
+      $agregard = $conn->prepare($mysql);
 
-  $agregard = $conn->prepare($mysql);
-
-  $agregard->bindParam(':name', $_POST['name']);
-  $agregard->bindParam(':preciocompra', $_POST['preciocompra']);
-  $agregard->bindParam(':precioventa', $_POST['precioventa']);
-  $agregard->bindParam(':upc', $_POST['upc']);
-  $agregard->bindParam(':numparte', $_POST['numparte']);
-  $agregard->bindParam(':descripcion', $_POST['descripcion']);
-  $agregard->bindParam(':alto', $_POST['alto']);
-  $agregard->bindParam(':ancho', $_POST['ancho']);
-  $agregard->bindParam(':largo', $_POST['largo']);
-  $agregard->bindParam(':idcatalago', $_POST['idcatalago']);
-  $agregard->bindParam(':idcategoria', $_POST['idcategoria']);
-  $agregard->bindParam(':idmarca', $_POST['idmarca']);
-  $agregard->bindParam(':imagen', $dir . $nombre_archivo);
+      $agregard->bindParam(':name', $_POST['name']);
+      $agregard->bindParam(':preciocompra', $_POST['preciocompra']);
+      $agregard->bindParam(':precioventa', $_POST['precioventa']);
+      $agregard->bindParam(':upc', $_POST['upc']);
+      $agregard->bindParam(':numparte', $_POST['numparte']);
+      $agregard->bindParam(':descripcion', $_POST['descripcion']);
+      $agregard->bindParam(':alto', $_POST['alto']);
+      $agregard->bindParam(':ancho', $_POST['ancho']);
+      $agregard->bindParam(':largo', $_POST['largo']);
+      $agregard->bindParam(':idcatalago', $_POST['idcatalago']);
+      $agregard->bindParam(':idcategoria', $_POST['idcategoria']);
+      $agregard->bindParam(':idmarca', $_POST['idmarca']);
+      $agregard->bindParam(':imagen', $ruta2);
 
 
 
-  if ($agregard->execute()) {
-    $message = 'Producto agregada';
-  } else {
-    $message = 'Error al guardar producto';
+      if ($agregard->execute()) {
+
+        $records2 = $conn->prepare('SELECT *  FROM producto WHERE name = :nombrepro and preciocompra = :preciocompra and precioventa=:precioventa');
+        $records2->bindParam(':nombrepro', $_POST['name']);
+        $records2->bindParam(':preciocompra',  $_POST['preciocompra']);
+        $records2->bindParam(':precioventa',  $_POST['precioventa']);
+        $records2->execute();
+        $results2 = $records2->fetch(PDO::FETCH_ASSOC);
+
+        if (is_array($results2)) {
+          if (count($results2) > 0) {
+            $producto = $results2;
+            $mysql2 = "INSERT INTO imagenes (idproducto,lugar) VALUES (:idproducto, :lugar)";
+            $agregard2 = $conn->prepare($mysql2);
+            $agregard2->bindParam(':idproducto', $producto['idproducto']);
+            $lu = "hola";
+            $agregard2->bindParam(':lugar', $lu);
+            if ($agregard2->execute()){
+              $message = 'Producto agregada';
+            }
+
+          }
+        }
+      } else {
+        $message = 'Error al guardar producto';
+      }
+    } else {
+      $message = "Error al subir el archivo";
+    }
   }
 }
 ?>
@@ -80,7 +111,7 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
     <p style="text-align:center;">Agregando producto por el administrador <b><?= $user['user']; ?></b><br><br></p>
     <div style="border: gray 2px solid; margin: 30px; text-align: left; padding-left: 40%;">
 
-      <form action="agregarProducto.php" method="post">
+      <form action="agregarProducto.php" method="post" enctype="multipart/form-data">
 
         Nombre: <input type="text" name="name" placeholder="Nombre del producto" required><br>
         Precio de compra: <input type="text" name="preciocompra" placeholder="Precio de compra" required><br>
@@ -95,8 +126,12 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
         ID categoria: <input type="text" name="idcategoria" placeholder="ID categoria" required><br>
         ID marca: <input type="text" name="idmarca" placeholder="ID marca" required><br>
         <div class="input-group mb-3">
+          <labe>Elija la imgen de presentacion</labe>
           <input type="file" class="form-control" id="imagen" name="imagen">
-          <label class="input-group-text" for="inputGroupFile02">Upload</label>
+        </div>
+        <div class="input-group mb-3">
+          <labe>Elija las imgenes del producto</labe>
+          <input type="file" class="form-control" id="imagenes[]" name="imagenes[]" multiple="">
         </div>
 
         <input type="submit" name="send" value="Agregar">
@@ -117,14 +152,14 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
     </form>
 
 
-      <div class="main">
-        <h1>Mostrando imagen almacenada en MySQL</h1>
-        <div class="panel panel-primary">
-          <div class="panel-body">
-            <img src='vista.php?idimagen=10' alt='Img blob desde MySQL' width="600" />
-          </div>
+    <div class="main">
+      <h1>Mostrando imagen almacenada en MySQL</h1>
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <img src='vista.php?idimagen=10' alt='Img blob desde MySQL' width="600" />
         </div>
       </div>
+    </div>
 
 
 </body>
