@@ -58,7 +58,7 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
 
         if (is_array($results2)) {
           if (count($results2) > 0) {
-            foreach($_FILES['imagenes']['tmp_name'] as $key => $tmp_name) {
+            foreach ($_FILES['imagenes']['tmp_name'] as $key => $tmp_name) {
               if ($_FILES['imagenes']['name'][$key]) {
                 $filename = $_FILES['imagenes']['name'][$key];
                 $temporal = $_FILES['imagenes']['tmp_name'][$key];
@@ -82,7 +82,6 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
               }
               $message = 'Todo perfecto';
             }
-            
           }
         } else {
           $message = 'Error al guardar producto';
@@ -118,14 +117,16 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
 
 
   <h1 style="display: inline-flex;">Productos</h1>
-  <a href="agregarCategoria.php"> Agregar categoria</a>
-  <br>
   <a class="nav-link" href="../logout.php">Cerrar sesion</a>
+  <br>
+  <a href="agregarCategoria.php"> Agregar categoria</a><br>
+  <a href="agregarMarca.php"> Agregar Marca</a>
+  
   <?php if (!empty($message)) : ?>
     <p> <?= $message ?></p>
   <?php else : ?>
     <p style="text-align:center;">Agregando producto por el administrador <b><?= $user['user']; ?></b><br><br></p>
-    <div style="border: gray 2px solid; margin: 30px; text-align: left; padding-left: 40%;">
+    <div>
 
       <form action="agregarProducto.php" method="post" enctype="multipart/form-data">
 
@@ -139,15 +140,50 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
         Ancho: <input type="text" name="ancho" placeholder="Ancho (cm)"><br>
         Largo: <input type="text" name="largo" placeholder="Largo (cm)"><br>
         ID catalago: <input type="text" name="idcatalago" placeholder="ID catalago" required><br>
-        ID categoria: <input type="text" name="idcategoria" placeholder="ID categoria" required><br>
-        ID marca: <input type="text" name="idmarca" placeholder="ID marca" required><br>
-        <div class="input-group mb-3">
-          <labe>Elija la imgen de presentacion</labe>
-          <input type="file" class="form-control" id="imagen" name="imagen">
-        </div>
-        <div class="input-group mb-3">
-          <labe>Elija las imgenes del producto</labe>
-          <input type="file" class="form-control" id="imagenes[]" name="imagenes[]" multiple="">
+        <?php
+        include("../direcciones/funciones.php");
+        ?>
+        <div class="container">
+          Elija la categoria
+          <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="idcategoria">
+            <?php
+            $sql = "select * from categoria";
+            $result = db_query($sql);
+            $contador = 1;
+            while ($row = mysqli_fetch_object($result)) {
+            ?>
+
+              <option value="<?php echo $row->idcategoria ?>"><?php echo $row->nombrecat ?></option>
+
+            <?php $contador += 1;
+            }
+            $result->close();
+            ?>
+          </select>
+          Elija la marca
+          <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="idmarca">
+            <?php
+            $sql2 = "select * from marca";
+            $result2 = db_query($sql2);
+            $contador = 1;
+            while ($row2 = mysqli_fetch_object($result2)) {
+            ?>
+
+              <option value="<?php echo $row2->idmarca?>"><?php echo $row2->nombremarc ?></option>
+
+            <?php $contador += 1;
+            }
+            $result2->close();
+            ?>
+          </select>
+          <div class="input-group mb-3">
+            <labe>Elija la imagen de presentacion</labe>
+            <input type="file" class="form-control" id="imagen" name="imagen">
+          </div>
+          <div class="input-group mb-3">
+            <labe>Elija las imagenes del producto</labe>
+            <input type="file" class="form-control" id="imagenes[]" name="imagenes[]" multiple="">
+          </div>
         </div>
 
         <input type="submit" name="send" value="Agregar">
