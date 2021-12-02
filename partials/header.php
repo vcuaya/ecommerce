@@ -31,13 +31,13 @@ if (isset($_SESSION['user_id'])) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
-	<link rel="stylesheet" href="css/perfil.css">
-	<link rel="stylesheet" href="sweetalert2.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/perfil_Y_tarjeta.css">
     
+
 
     <title>E-commerce</title>
 </head>
@@ -89,7 +89,7 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="container fw-bold"> Hola <?= $user['user']; ?></div>
                                 </li>
                                 <li><a class="dropdown-item" href="perfil.php">Cuenta</a></li>
-                                <li><a class="dropdown-item" href="logout.php">Salir</a></li>                                
+                                <li><a class="dropdown-item" href="logout.php">Salir</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>

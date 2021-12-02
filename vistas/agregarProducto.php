@@ -58,26 +58,42 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
 
         if (is_array($results2)) {
           if (count($results2) > 0) {
-            $producto = $results2;
-            $mysql2 = "INSERT INTO imagenes (idproducto,lugar) VALUES (:idproducto, :lugar)";
-            $agregard2 = $conn->prepare($mysql2);
-            $agregard2->bindParam(':idproducto', $producto['idproducto']);
-            $lu = "hola";
-            $agregard2->bindParam(':lugar', $lu);
-            if ($agregard2->execute()){
-              $message = 'Producto agregada';
-            }
+            foreach($_FILES['imagenes']['tmp_name'] as $key => $tmp_name) {
+              if ($_FILES['imagenes']['name'][$key]) {
+                $filename = $_FILES['imagenes']['name'][$key];
+                $temporal = $_FILES['imagenes']['tmp_name'][$key];
+                $directorio = "../images/imgpro/";
+                $directorio2 = "images/imgpro/";
 
+                $filename_final = date("m-d-y") . "-" . date("H-i-s") . "-" . $filename;
+
+                $ruta = $directorio . $filename_final;
+                $ruta2 = $directorio2 . $filename_final;
+                if (move_uploaded_file($temporal, $ruta)) {
+                  $producto = $results2;
+                  $mysql2 = "INSERT INTO imagenes (idproducto,lugar) VALUES (:idproducto, :lugar)";
+                  $agregard2 = $conn->prepare($mysql2);
+                  $agregard2->bindParam(':idproducto', $producto['idproducto']);
+                  $agregard2->bindParam(':lugar', $ruta2);
+                  $agregard2->execute();
+                } else {
+                  $message = 'Error en cargar un archivo';
+                }
+              }
+              $message = 'Todo perfecto';
+            }
+            
           }
+        } else {
+          $message = 'Error al guardar producto';
         }
       } else {
-        $message = 'Error al guardar producto';
+        $message = "Error al subir el archivo";
       }
-    } else {
-      $message = "Error al subir el archivo";
     }
   }
 }
+
 ?>
 
 
@@ -102,7 +118,7 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
 
 
   <h1 style="display: inline-flex;">Productos</h1>
-  <a href="../productos/verproductos.php"> Ver productos</a>
+  <a href="agregarCategoria.php"> Agregar categoria</a>
   <br>
   <a class="nav-link" href="../logout.php">Cerrar sesion</a>
   <?php if (!empty($message)) : ?>
@@ -140,26 +156,7 @@ if (!empty($_POST['name']) && !empty($_POST['preciocompra']) && !empty($_POST['p
     <br>
     </div>
 
-    <form name="MiForm" id="MiForm" method="post" action="../direcciones/cargar.php" enctype="multipart/form-data">
-      <h4 class="text-center">Seleccione imagen a cargar</h4>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Archivos</label>
-        <div class="col-sm-8">
-          <input type="file" class="form-control" id="image" name="image" multiple>
-        </div>
-        <button name="submit" class="btn btn-primary">Cargar Imagen</button>
-      </div>
-    </form>
-
-
-    <div class="main">
-      <h1>Mostrando imagen almacenada en MySQL</h1>
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          <img src='vista.php?idimagen=10' alt='Img blob desde MySQL' width="600" />
-        </div>
-      </div>
-    </div>
+    <a href="agregarProducto.php"> Agregar mas... </a>
 
 
 </body>
