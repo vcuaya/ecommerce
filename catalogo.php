@@ -1,3 +1,10 @@
+<?php
+include("direcciones/funciones.php");
+
+if(!empty($_POST['cate'])){
+  header("Location: catalogo.php?idcategoria=".$_POST['cate']);
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -43,11 +50,23 @@
 
   <div class="container">
     <div class="categorias">
-      <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-        <option value="1">Ropa</option>
-        <option value="2">Tecnologia</option>
-        <option value="3">Cocina</option>
-      </select>
+      <form action="catalogo.php" method="post" id="miformulario" name="miformulario">
+        <select onchange="cargar()" class="form-select form-select-sm" aria-label=".form-select-sm example" name="cate">
+          <?php
+          $sql2 = "select * from categoria";
+          $result2 = db_query($sql2);
+          $contador = 1;
+          while ($row2 = mysqli_fetch_object($result2)) {
+          ?>
+
+            <option value="<?php echo $row2->idcategoria ?>" <?php if($row2->idcategoria == $idc){print "selected";}; ?>><?php echo $row2->nombrecat ?></option>
+
+          <?php $contador += 1;
+          }
+          $result2->close();
+          ?>
+        </select>
+      </form>
     </div>
   </div>
 
@@ -55,9 +74,7 @@
   <div class="container-card">
 
     <div class="justify-content-center">
-      <?php
-      include("direcciones/funciones.php");
-      ?>
+
       <?php
       $sql = "SELECT a.idproducto, a.name, a.imagen, a.precioventa, a.descripcion, b.nombrecat FROM producto a INNER JOIN categoria b on a.idcategoria = b.idcategoria AND b.idcategoria =" . $idc . "";
       $result = db_query($sql);
@@ -101,6 +118,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
+  <script>
+    function cargar() {
+      // Una vez cargada la página, el formulario se enviara automáticamente.
+      document.forms["miformulario"].submit();
+    }
+  </script>
 </body>
 
 </html>
