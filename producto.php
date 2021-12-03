@@ -171,7 +171,7 @@ if (isset($_GET['idproducto'])) {
               <form action="direcciones/agregarArt.php" method="post">
                 <ul class="prosuct-qty">
                   <span>Cantidad :</span>
-                  <input name="idproducto" type="text" value="<?php print $producto['idproducto']?>" style="display: none;">
+                  <input name="idproducto" type="text" value="<?php print $producto['idproducto'] ?>" style="display: none;">
                   <select name="cantidad">
                     <option>1</option>
                     <option>2</option>
@@ -182,8 +182,8 @@ if (isset($_GET['idproducto'])) {
                   </select>
                 </ul>
                 <div class="btn_form text-center">
-
                   <input class="btn btn-primary" type="submit" value="Añadir a carrito" title="">
+
 
                 </div>
               </form>
