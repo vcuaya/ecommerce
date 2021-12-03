@@ -95,6 +95,11 @@ text-transform:none;
 
 .fondo-footer{
     background: #1B1F2F;
+	position:relative;
+	left:0px;
+	bottom:0px;
+	width:100%;
+	margin-top: 100px;
 }
 
 
