@@ -6,7 +6,7 @@
     header('Location: ../index.php');
   }
   if (isset($_SESSION['admin_id'])) {
-    header('Location: agregarProducto.php');
+    header('Location: perfil_admin.php');
   }
 
   require_once '../conexion/database.php';
@@ -48,7 +48,7 @@
         
         if(password_verify($_POST['password'], $results2['password'])){
           $_SESSION['admin_id'] = $results2['idadministrador'];
-          header("Location: agregarProducto.php");
+          header('Location: perfil_admin.php');
           $message='Datos correctos';
 
         }else {

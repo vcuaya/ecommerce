@@ -109,7 +109,7 @@ if (is_array($resultsc)) {
       ?>
         <div class="text-center  mb-4">
           <div>
-            <a class="w-10" href="productos.php?idcategoria=<?php echo $row->idcategoria; ?>" style="text-decoration: none;">
+            <a class="w-10" href="catalogo.php?idcategoria=<?php echo $row->idcategoria; ?>" style="text-decoration: none;">
               <div class="card" style="    background-size: cover; background-position: center ; background-image: url('<?php echo $row->imagen ?>')">
                 <div class="card-body" style="background-color: rgba(0,0,0,0.5);">
                   <br>
