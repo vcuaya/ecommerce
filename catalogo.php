@@ -91,7 +91,7 @@ if(!empty($_POST['cate'])){
             <h3><?php echo $row->name ?></h3>
             <p><?php echo $row->descripcion ?></p>
             <p style="font-weight: bold;">$<?php echo $row->precioventa ?></p>
-            <a href="carrito.php" class="boton-carrito">Añadir a carrito</a>
+            <a href="direcciones/agregarArt2.php?idproducto=<?php echo $row->idproducto?>" class="boton-carrito">Añadir a carrito</a>
           </div>
         </div>
       <?php
