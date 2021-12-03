@@ -18,7 +18,7 @@ if (isset($_SESSION['user_id'])) {
 
 if (isset($_GET['idproducto'])) {
   $idp = $_GET['idproducto'];
-  $recordsd = $conn->prepare('SELECT p.precioventa, p.modelo, p.numparte, p.descripcion, p.alto, p.ancho, p.largo, p.name,p.peso, m.nombremarc FROM producto AS p INNER JOIN marca AS m ON p.idmarca = m.idmarca AND p.idproducto=:idp');
+  $recordsd = $conn->prepare('SELECT p.idproducto, p.precioventa, p.modelo, p.numparte, p.descripcion, p.alto, p.ancho, p.largo, p.name,p.peso, m.nombremarc FROM producto AS p INNER JOIN marca AS m ON p.idmarca = m.idmarca AND p.idproducto=:idp');
   $recordsd->bindParam(':idp', $idp);
   $recordsd->execute();
   $resultsd = $recordsd->fetch(PDO::FETCH_ASSOC);
@@ -99,7 +99,7 @@ if (isset($_GET['idproducto'])) {
             <a class="nav-link active " aria-current="page" href="index.php">Inicio</a>
           </li>
           <li class="nav-item menu_colapsable">
-            <a class="nav-link" href="carrito.html">Carrito</a>
+            <a class="nav-link" href="carrito.php">Carrito</a>
           </li>
           <li class="nav-item menu_colapsable">
             <a class="nav-link" href="acerca_de.html">Acerca de</a>
@@ -168,22 +168,25 @@ if (isset($_GET['idproducto'])) {
           <div class="col-md-5">
             <div class="box-info-product">
               <p class="price2">$<?= $producto['precioventa']; ?></p>
-              <ul class="prosuct-qty">
-                <span>Cantidad :</span>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                </select>
-              </ul>
-              <div class="btn_form text-center">
-                <form>
-                  <input type="submit" value="Añadir a carrito" title="">
-                </form>
-              </div>
+              <form action="direcciones/agregarArt.php" method="post">
+                <ul class="prosuct-qty">
+                  <span>Cantidad :</span>
+                  <input name="idproducto" type="text" value="<?php print $producto['idproducto']?>" style="display: none;">
+                  <select name="cantidad">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                  </select>
+                </ul>
+                <div class="btn_form text-center">
+
+                  <input class="btn btn-primary" type="submit" value="Añadir a carrito" title="">
+
+                </div>
+              </form>
             </div>
           </div>
           <br>
@@ -265,8 +268,8 @@ if (isset($_GET['idproducto'])) {
     <footer class="py-3 my-4">
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
         <li class="nav-item"><a href="index.php" class="nav-link px-2 text-white">Inicio</a></li>
-        <li class="nav-item"><a href="carrito.html" class="nav-link px-2 text-white">Carrito</a></li>
-        <li class="nav-item"><a href="catalogo.html" class="nav-link px-2 text-white">Catálogo</a></li>
+        <li class="nav-item"><a href="carrito.php" class="nav-link px-2 text-white">Carrito</a></li>
+        <li class="nav-item"><a href="catalogo.php?idcategoria=1" class="nav-link px-2 text-white">Catálogo</a></li>
         <li class="nav-item"><a href="acerca_de.html" class="nav-link px-2 text-white">Acerca de</a></li>
         <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Cuenta</a></li>
       </ul>

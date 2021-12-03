@@ -67,7 +67,7 @@ if (isset($_SESSION['user_id'])) {
                         <a class="nav-link active " aria-current="page" href="index.php">Inicio</a>
                     </li>
                     <li class="nav-item menu_colapsable">
-                        <a class="nav-link" href="carrito.html">Carrito</a>
+                        <a class="nav-link" href="carrito.php">Carrito</a>
                     </li>
                     <li class="nav-item menu_colapsable">
                         <a class="nav-link" href="acerca_de.html">Acerca de</a>
